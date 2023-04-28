@@ -19,8 +19,10 @@ use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\Textarea;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
@@ -29,9 +31,8 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\ArticleResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\ArticleResource\RelationManagers;
+use App\Filament\Resources\ArticleResource\Widgets\ArticleStats;
 use App\Filament\Resources\ArticleResource\Widgets\ArticleStatsOverviewWidget;
-use Filament\Forms\Components\Repeater;
-use Filament\Tables\Columns\TextColumn;
 
 class ArticleResource extends Resource
 {
@@ -133,10 +134,11 @@ class ArticleResource extends Resource
             ]);
     }
 
-    public static function getWidgets(): array
+
+  public static function getWidgets(): array
     {
         return [
-            ArticleStatsOverviewWidget::class
+            ArticleStats::class,
         ];
     }
 

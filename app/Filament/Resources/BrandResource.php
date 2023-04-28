@@ -73,7 +73,12 @@ class BrandResource extends Resource
 
         ];
     }
-
+     public static function getGloballySearchableAttributes(): array
+    {
+        return [
+            'wording',
+        ];
+    }
     public static function getRelations(): array
     {
         return [

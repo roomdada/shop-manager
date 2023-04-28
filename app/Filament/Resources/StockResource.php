@@ -10,6 +10,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -26,7 +27,7 @@ class StockResource extends Resource
     {
         return $form
             ->schema([
-                //
+
             ]);
     }
 
@@ -34,7 +35,10 @@ class StockResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('created_at')->label('Date de création')->searchable()->sortable(),
+                TextColumn::make('identifier')->label('Ref Stock')->searchable()->sortable(),
+                TextColumn::make('article.wording')->label('Ref article')->searchable()->sortable(),
+                TextColumn::make('quantity')->label('Quantité')->searchable()->sortable(),
             ])
             ->filters([
                 //

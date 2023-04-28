@@ -24,4 +24,5 @@ class AppServiceProvider extends ServiceProvider
             Filament::registerViteTheme('resources/css/app.css');
         });
     }
+
 }

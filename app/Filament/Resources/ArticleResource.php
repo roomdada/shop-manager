@@ -29,6 +29,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\ArticleResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\ArticleResource\RelationManagers;
+use App\Filament\Resources\ArticleResource\Widgets\ArticleStatsOverviewWidget;
 use Filament\Forms\Components\Repeater;
 use Filament\Tables\Columns\TextColumn;
 
@@ -123,11 +124,20 @@ class ArticleResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make()->label('')->color('success')->icon('heroicon-o-eye'),
+                Tables\Actions\EditAction::make()->label('')->color('yellow')->icon('heroicon-o-pencil'),
+                Tables\Actions\DeleteAction::make()->label('')->color('danger')->icon('heroicon-o-trash')
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            ArticleStatsOverviewWidget::class
+        ];
     }
 
     public static function getRelations(): array
@@ -137,11 +147,23 @@ class ArticleResource extends Resource
         ];
     }
 
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['identifier','brand.wording','model.wording','category.title','title','description'];
+    }
+
+    protected static function getNavigationBadge(): ?string
+    {
+        return self::$model::count();
+    }
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListArticles::route('/'),
             'create' => Pages\CreateArticle::route('/create'),
+            'view' => Pages\ViewArticle::route('/{record}'),
             'edit' => Pages\EditArticle::route('/{record}/edit'),
         ];
     }

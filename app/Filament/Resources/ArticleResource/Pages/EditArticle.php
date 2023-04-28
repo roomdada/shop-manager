@@ -9,6 +9,7 @@ use Filament\Resources\Pages\EditRecord;
 class EditArticle extends EditRecord
 {
     protected static string $resource = ArticleResource::class;
+    protected static ?string $title = 'Modifier l\' article';
 
     protected function getActions(): array
     {

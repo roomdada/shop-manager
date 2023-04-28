@@ -6,7 +6,8 @@ use App\Filament\Resources\ArticleResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ViewRecord;
 
-class ViewStock extends ViewRecord
+class ViewArticle extends ViewRecord
 {
     protected static string $resource = ArticleResource::class;
+    protected static ?string $title = 'Détails sur l\'article';
 }

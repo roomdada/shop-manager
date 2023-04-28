@@ -67,6 +67,18 @@ class KindResource extends Resource
         ];
     }
 
+  public static function getGloballySearchableAttributes(): array
+    {
+        return [
+            'wording',
+        ];
+    }
+
+    protected static function getGlobalSearchEloquentQuery(): Builder
+    {
+        return parent::getGlobalSearchEloquentQuery()->with(['articles']);
+    }
+
     public static function getPages(): array
     {
         return [

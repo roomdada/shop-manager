@@ -24,6 +24,7 @@ class ArticleFactory extends Factory
     {
         $title = Fake()->sentence(3);
         return [
+            'identifier' => Str::upper(Str::random(4)),
             'title' => $title,
             'slug' => Str::slug($title),
             'description' => Fake()->paragraph(3),

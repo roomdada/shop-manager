@@ -9,6 +9,12 @@ use Filament\Resources\Pages\EditRecord;
 class EditType extends EditRecord
 {
     protected static string $resource = TypeResource::class;
+    protected static ?string $title = 'Modifier le type d\'article';
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 
     protected function getActions(): array
     {

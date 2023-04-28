@@ -9,6 +9,7 @@ use Filament\Resources\Pages\ListRecords;
 class ListModels extends ListRecords
 {
     protected static string $resource = ModelResource::class;
+    protected static ?string $title = 'Liste des modèles';
 
     protected function getActions(): array
     {

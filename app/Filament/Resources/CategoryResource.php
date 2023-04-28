@@ -21,11 +21,21 @@ class CategoryResource extends Resource
     protected static ?string $navigationGroup = 'Sherylux - Parametre article';
     protected static ?string $navigationLabel = 'Categories';
 
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->with('articles')->withCount('articles');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Forms\Components\Card::make()->schema([
+                    Forms\Components\Grid::make(1)->schema([
+                        Forms\Components\TextInput::make('title')->label('Libellé'),
+                        Forms\Components\Textarea::make('description')->label('Description de la categorie'),
+                    ])
+                ])
             ]);
     }
 
@@ -33,13 +43,17 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('created_at')->label('Date de création')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('title')->label('Libellé')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('articles_count')->label('Nombre d\'articles')->searchable()->sortable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make()->label('')->color('success')->icon('heroicon-o-eye'),
+                Tables\Actions\EditAction::make()->label('')->color('yellow')->icon('heroicon-o-pencil'),
+                Tables\Actions\DeleteAction::make()->label('')->color('danger')->icon('heroicon-o-trash')
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -58,6 +72,7 @@ class CategoryResource extends Resource
         return [
             'index' => Pages\ListCategories::route('/'),
             'create' => Pages\CreateCategory::route('/create'),
+            'view' => Pages\ViewCategory::route('/{record}'),
             'edit' => Pages\EditCategory::route('/{record}/edit'),
         ];
     }

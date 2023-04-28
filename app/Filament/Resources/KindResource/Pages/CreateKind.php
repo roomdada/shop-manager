@@ -9,4 +9,10 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateKind extends CreateRecord
 {
     protected static string $resource = KindResource::class;
+    protected static ?string $title = 'Ajouter un genre pour les articles';
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }

@@ -11,7 +11,7 @@ trait SluggableTrait
     {
         return [
             'slug' => [
-                'source' => 'wording'
+                'source' => isset($this->attributes['wording'])  ? 'wording' : 'title'
             ]
         ];
     }

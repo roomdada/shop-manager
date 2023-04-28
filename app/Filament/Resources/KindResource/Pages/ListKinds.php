@@ -9,6 +9,7 @@ use Filament\Resources\Pages\ListRecords;
 class ListKinds extends ListRecords
 {
     protected static string $resource = KindResource::class;
+    protected static ?string $title = 'Liste des genres';
 
     protected function getActions(): array
     {

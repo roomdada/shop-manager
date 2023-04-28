@@ -2,16 +2,21 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ModelResource\Pages;
-use App\Filament\Resources\ModelResource\RelationManagers;
-use App\Models\Model;
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
+use App\Models\Model;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Textarea;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\ModelResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\ModelResource\RelationManagers;
 
 class ModelResource extends Resource
 {
@@ -25,7 +30,12 @@ class ModelResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Card::make()->schema([
+                    Grid::make(1)->schema([
+                        TextInput::make('wording')->label('Libellé'),
+                        Textarea::make('description')->label('Description du genre'),
+                    ])
+                ])
             ]);
     }
 
@@ -33,13 +43,17 @@ class ModelResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('created_at')->label('Date de création')->searchable()->sortable(),
+                TextColumn::make('wording')->label('Libellé')->searchable()->sortable(),
+                TextColumn::make('articles_count')->label('Nombre d\'articles')->searchable()->sortable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make()->label('')->color('success')->icon('heroicon-o-eye'),
+                Tables\Actions\EditAction::make()->label('')->color('yellow')->icon('heroicon-o-pencil'),
+                Tables\Actions\DeleteAction::make()->label('')->color('danger')->icon('heroicon-o-trash')
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -58,6 +72,7 @@ class ModelResource extends Resource
         return [
             'index' => Pages\ListModels::route('/'),
             'create' => Pages\CreateModel::route('/create'),
+            'view' => Pages\ViewModel::route('/{record}'),
             'edit' => Pages\EditModel::route('/{record}/edit'),
         ];
     }

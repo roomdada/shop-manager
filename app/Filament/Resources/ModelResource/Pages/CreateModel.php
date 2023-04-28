@@ -8,5 +8,11 @@ use Filament\Resources\Pages\CreateRecord;
 
 class CreateModel extends CreateRecord
 {
+    protected static ?string $title = 'Ajouter un modèle';
     protected static string $resource = ModelResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }

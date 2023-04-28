@@ -1,7 +1,7 @@
 @props([
     'active' => false,
     'badge' => null,
-    'badgeColor' => null,
+    'badgeColor' => "text-white",
 ])
 
 <span

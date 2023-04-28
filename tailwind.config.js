@@ -18,8 +18,8 @@ module.exports = {
               primary: colors.purple,
               success: colors.green,
               warning: colors.yellow,
-              cprimary : "#265289",
-              csecondary: "#4789c8"
+              cprimary : "#202A42",
+              csecondary: "#6f00a1"
           },
         },
     },

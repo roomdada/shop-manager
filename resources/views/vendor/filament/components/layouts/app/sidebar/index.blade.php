@@ -14,7 +14,7 @@
     ])
 >
     <header @class([
-        'filament-sidebar-header border-b h-[4rem] shrink-0 flex items-center justify-center relative',
+        'filament-sidebar-header border-b  h-[4rem] shrink-0 flex items-center justify-center relative',
         'dark:border-gray-700' => config('filament.dark_mode'),
     ])>
         <div
@@ -47,11 +47,11 @@
                 href="{{ config('filament.home_url') }}"
                 data-turbo="false"
                 @class([
-                    'block w-full',
+                    'block w-full font-bold text-2xl font-mono text-start text-primary-500',
                     'lg:ml-3' => config('filament.layout.sidebar.is_collapsible_on_desktop') && (config('filament.layout.sidebar.collapsed_width') !== 0),
                 ])
             >
-                <x-filament::brand />
+             SHERYLUX
             </a>
         </div>
 

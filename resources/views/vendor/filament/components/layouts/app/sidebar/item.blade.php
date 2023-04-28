@@ -39,7 +39,7 @@
     >
         <x-dynamic-component
             :component="($active && $activeIcon) ? $activeIcon : $icon"
-            class="h-5 w-5 shrink-0"
+            class="h-4 w-4 shrink-0"
         />
 
         <div class="flex flex-1"
@@ -47,7 +47,7 @@
                 x-show="$store.sidebar.isOpen"
             @endif
         >
-            <span>
+            <span class='text-md'>
                 {{ $slot }}
             </span>
         </div>

@@ -31,7 +31,7 @@
                     <x-dynamic-component :component="$icon" class="ml-1 w-3 h-3 flex-shrink-0" />
                 @endif
 
-                <p class="flex-1 font-bold uppercase text-xs tracking-wider">
+                <p class="flex-1 font-bold uppercase text-xs tracking-wider text-black">
                     {{ $label }}
                 </p>
             </div>

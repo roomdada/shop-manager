@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('variants', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
             $table->string('value');
             $table->foreignId('article_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('type_variant_id')->constrained()->cascadeOnDelete();
+            $table->boolean('disponibility')->default(true);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

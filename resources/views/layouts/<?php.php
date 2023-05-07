@@ -49,18 +49,18 @@ class BrandResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('created_at')->label('Date de création')->searchable()->sortable(),
-                TextColumn::make('wording')->label('Libellé')->searchable()->sortable(),
-                TextColumn::make('articles_count')->label('Nombre d\'articles')->searchable()->sortable(),
+                TextColumn::make('created_at')->label('Date de création'),
+                TextColumn::make('wording')->label('Libellé'),
+                TextColumn::make('articles_count')->label('Nombre d\'articles'),
             ])
-
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make()->label('')->color('success')->icon('heroicon-o-eye'),
-                Tables\Actions\EditAction::make()->label('')->color('yellow')->icon('heroicon-o-pencil'),
-                Tables\Actions\DeleteAction::make()->label('')->color('danger')->icon('heroicon-o-trash')
+                Action::make('show')->label('')->icon('heroicon-o-eye')->color('primary')
+                    ->link('filament.resources.brands.edit', fn (Brand $brand) => ['brand' => $brand]),
+                Tables\Actions\EditAction::make()->label('')->color('yellow'),
+                Tables\Actions\DeleteAction::make()->label('')->color('danger'),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -70,19 +70,15 @@ class BrandResource extends Resource
     public function getTableActions(): array
     {
         return [
+            Tables\Actions\EditAction::make(),
+            Tables\Actions\DeleteAction::make(),
+        ];
+    }
 
-        ];
-    }
-     public static function getGloballySearchableAttributes(): array
-    {
-        return [
-            'wording',
-        ];
-    }
     public static function getRelations(): array
     {
         return [
-            RelationManagers\ArticlesRelationManager::class,
+            //
         ];
     }
 
@@ -93,10 +89,5 @@ class BrandResource extends Resource
             'create' => Pages\CreateBrand::route('/create'),
             'edit' => Pages\EditBrand::route('/{record}/edit'),
         ];
-    }
-
-    protected function hideDefaultActionBarItems()
-    {
-        return true;
     }
 }

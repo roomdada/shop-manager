@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('type_variants', function (Blueprint $table) {
             $table->id();
             $table->string('type');
-            $table->foreignId('variant_id')->constrained()->cascadeOnDelete();
+            $table->uuid('uuid')->unique();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

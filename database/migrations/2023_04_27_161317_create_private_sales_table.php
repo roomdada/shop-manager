@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('private_sales', function (Blueprint $table) {
             $table->id();
+            $table->string('identifier')->unique();
+            $table->integer('quantity');
+            $table->integer('price');
+            $table->foreignId('article_id')->constrained()->cascadeOnDelete();
+            $table->timestamp('opening_date')->nullable();
+            $table->timestamp('closing_date')->nullable();
+            $table->boolean('disponibility')->default(true);
             $table->timestamps();
         });
     }

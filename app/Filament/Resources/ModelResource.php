@@ -63,7 +63,7 @@ class ModelResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\ArticlesRelationManager::class,
         ];
     }
 

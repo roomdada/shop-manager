@@ -9,6 +9,10 @@ use Filament\Resources\Pages\ListRecords;
 class ListPrivateSales extends ListRecords
 {
     protected static string $resource = PrivateSaleResource::class;
+    protected static ?string $title = 'Articles en vente privée';
+
+
+
 
     protected function getActions(): array
     {

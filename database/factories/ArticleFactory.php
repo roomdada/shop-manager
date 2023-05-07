@@ -29,6 +29,7 @@ class ArticleFactory extends Factory
             'slug' => Str::slug($title),
             'description' => Fake()->paragraph(3),
             'quantity' => 0,
+            'price' => Fake()->numberBetween(1000, 9000),
             'category_id' => Category::all()->random()->id,
             'model_id' => Model::all()->random()->id,
             'brand_id' => Brand::all()->random()->id,

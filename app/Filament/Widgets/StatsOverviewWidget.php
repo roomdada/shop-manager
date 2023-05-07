@@ -11,20 +11,24 @@ class StatsOverviewWidget extends BaseWidget
     protected function getCards(): array
     {
         return [
-            Card::make('Articles', '3000')
-                ->description('32k augmenter')
-                ->descriptionIcon('heroicon-s-trending-up')
-                ->chart([7, 2, 10, 3, 15, 4, 17])
+            Card::make('Articles', \App\Models\Article::count())
+                ->description('Total des articles')
                 ->color('success'),
-            Card::make('Commandes', '1340')
-                ->description('3% augmenter')
-                ->descriptionIcon('heroicon-s-trending-down')
+            Card::make('Commandes', \App\Models\Order::count())
+                ->description('0% augmenter')
                 ->chart([17, 16, 14, 15, 14, 13, 70])
                 ->color('danger'),
-            Card::make('Commandes du jour', '3543')
-                ->description('7% augmenter')
-                ->descriptionIcon('heroicon-s-trending-up')
-                ->chart([15, 4, 10, 2, 12, 4, 12])
+            Card::make('Commandes du jour', \App\Models\Order::query()->today()->count())
+                ->description('0% augmenter')
+                ->color('success'),
+               Card::make('Partenaires', \App\Models\Order::query()->today()->count())
+                ->description('0% augmenter')
+                ->color('success'),
+               Card::make('Clients', \App\Models\Order::query()->today()->count())
+                ->description('0% augmenter')
+                ->color('success'),
+               Card::make('Coupons actifs', \App\Models\Coupon::query()->valid()->count())
+                ->description('0% augmenter')
                 ->color('success'),
         ];
     }

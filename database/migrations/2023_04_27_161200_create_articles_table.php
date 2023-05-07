@@ -23,13 +23,10 @@ return new class extends Migration
             $table->string('first_image');
             $table->string('second_image')->nullable();
             $table->string('third_image')->nullable();
-            $table->float('price')->nullable();
+            $table->integer('price')->nullable();
             $table->unsignedBigInteger('quantity');
-            $table->json('color')->nullable();
             $table->text('description');
             $table->boolean('disponibility')->default(true);
-            $table->string('size')->nullable();
-            $table->string('weight')->nullable();
             $table->foreignIdFor(Category::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Brand::class)->constrained()->cascadeOnDelete();
             $table->integer('model_id')->index()->nullable();

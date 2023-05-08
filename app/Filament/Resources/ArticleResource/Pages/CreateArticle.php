@@ -7,6 +7,8 @@ use App\Models\TypeVariant;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\CreateRecord;
 use App\Filament\Resources\ArticleResource;
+use App\Models\Stock;
+use App\Models\StockHistory;
 
 class CreateArticle extends CreateRecord
 {
@@ -39,10 +41,18 @@ class CreateArticle extends CreateRecord
       //  unset($this->data['variants']);
         $data = $this->data;
         $lastCreated = \App\Models\Article::latest()->first();
-        $lastCreated->stock()->create([
+
+       $stock = $lastCreated->stock()->create([
             'identifier' => "STOCK-".rand(1000, 9999), // "STOCK-1234
             'quantity_stoked' => $data['quantity'],
             'article_id' => $lastCreated->id
+        ]);
+
+        // gestion de l'historique des inventaires
+        $stock->inventories()->create([
+            'quantity' => $data['quantity'],
+            'stock_id' => $stock->id,
+            'type' => StockHistory::SUPPLY
         ]);
 
         // create variants

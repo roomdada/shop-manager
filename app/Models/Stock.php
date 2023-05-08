@@ -24,5 +24,16 @@ class Stock extends Model
         return $this->hasMany(StockHistory::class);
     }
 
+    public function addStock(int $quantity)
+    {
+        $this->increment('quantity_stoked', $quantity);
+
+        $this->inventories()->create([
+            'quantity' => $quantity,
+            'type' => StockHistory::SUPPLY
+        ]);
+    }
+
+
 
 }

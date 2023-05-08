@@ -15,4 +15,10 @@ class CreateStock extends CreateRecord
     {
         return $this->getResource()::getUrl('index');
     }
+
+    protected function afterCreate(){
+        $quantity = $this->data['quantity'];
+        $stock = \App\Models\Article::find($this->data['article_id'])->stock;
+        $stock->addStock($quantity);
+    }
 }

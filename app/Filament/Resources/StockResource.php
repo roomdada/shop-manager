@@ -36,11 +36,11 @@ class StockResource extends Resource
         return $form
             ->schema([
                 Card::make()->schema([
-                    Select::make('article_id')->label('Article')->options(
-                        Article::query()->isNotDisponible()->pluck('title', 'id')->toArray()
-                    )->placeholder('Veuillez selectionner l\'article à approvisionner')->required(),
+                    TextInput::make('identifier')->label('Ref Stock')->disabled(),
+                    TextInput::make('article.identifier')->label('Ref article')->disabled(),
                     TextInput::make('quantity_stoked')
                         ->required()
+                        ->hidden(fn() => request()->route()->getName() === 'filament.resource.create')
                         ->rules(['required', 'numeric'])
                         ->label('Quantité à approvisionner'),
                 ])

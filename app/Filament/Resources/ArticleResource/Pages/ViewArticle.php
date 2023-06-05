@@ -10,4 +10,9 @@ class ViewArticle extends ViewRecord
 {
     protected static string $resource = ArticleResource::class;
     protected static ?string $title = 'Détails sur l\'article';
+
+
+    /*
+    * render view
+    */
 }

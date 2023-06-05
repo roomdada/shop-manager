@@ -23,7 +23,6 @@ class CreateArticle extends CreateRecord
     }
 
     // create article and variants
-
     protected function mutateFormDataBeforeCreate(array $data) : array
     {
         unset($data['Couleur']);
@@ -38,15 +37,15 @@ class CreateArticle extends CreateRecord
     public function afterCreate()
     {
         // get state
-      //  unset($this->data['variants']);
+        //  unset($this->data['variants']);
         $data = $this->data;
         $lastCreated = \App\Models\Article::latest()->first();
 
-       $stock = $lastCreated->stock()->create([
-            'identifier' => "STOCK-".rand(1000, 9999), // "STOCK-1234
-            'quantity_stoked' => $data['quantity'],
-            'article_id' => $lastCreated->id
-        ]);
+        $stock = $lastCreated->stock()->create([
+             'identifier' => "STOCK-".rand(1000, 9999), // "STOCK-1234
+             'quantity_stoked' => $data['quantity'],
+             'article_id' => $lastCreated->id
+         ]);
 
         // gestion de l'historique des inventaires
         $stock->inventories()->create([
@@ -57,8 +56,8 @@ class CreateArticle extends CreateRecord
 
         // create variants
 
-        if($data['Couleur'] != null){
-            foreach($data['Couleur'] as $color){
+        if($data['Couleur'] != null) {
+            foreach($data['Couleur'] as $color) {
                 Variant::create([
                     'value' => $color,
                     'article_id' => $lastCreated->id,
@@ -67,8 +66,8 @@ class CreateArticle extends CreateRecord
             }
         }
 
-        if($data['Taille'] != null){
-            foreach($data['Taille'] as $size){
+        if($data['Taille'] != null) {
+            foreach($data['Taille'] as $size) {
                 Variant::create([
                     'value' => $size,
                     'article_id' => $lastCreated->id,
@@ -77,8 +76,8 @@ class CreateArticle extends CreateRecord
             }
         }
 
-        if($data['Capacité'] != null){
-            foreach($data['Capacité'] as $capacity){
+        if($data['Capacité'] != null) {
+            foreach($data['Capacité'] as $capacity) {
                 Variant::create([
                     'value' => $capacity,
                     'article_id' => $lastCreated->id,
@@ -87,8 +86,8 @@ class CreateArticle extends CreateRecord
             }
         }
 
-        if($data['Matière'] != null){
-            foreach($data['Matière'] as $material){
+        if($data['Matière'] != null) {
+            foreach($data['Matière'] as $material) {
                 Variant::create([
                     'value' => $material,
                     'article_id' => $lastCreated->id,

@@ -11,26 +11,7 @@
     @endphp
 
     @if ((! $this->hasCombinedRelationManagerTabsWithForm()) || (! count($relationManagers)))
-        {{ $this->form }}
+          <x-details-card />
     @endif
 
-    @if (count($relationManagers))
-        @if (! $this->hasCombinedRelationManagerTabsWithForm())
-            <x-filament::hr />
-        @endif
-
-        <x-filament::resources.relation-managers
-            :active-manager="$activeRelationManager"
-            :form-tab-label="$this->getFormTabLabel()"
-            :managers="$relationManagers"
-            :owner-record="$record"
-            :page-class="static::class"
-        >
-            @if ($this->hasCombinedRelationManagerTabsWithForm())
-                <x-slot name="form">
-                    {{ $this->form }}
-                </x-slot>
-            @endif
-        </x-filament::resources.relation-managers>
-    @endif
 </x-filament::page>
